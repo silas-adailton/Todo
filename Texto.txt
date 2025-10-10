@@ -1,0 +1,25 @@
+flowchart LR
+%% --- CLIENT/SERVER SIDE ---
+subgraph A["🖥️ Arquitetura Client/Server"]
+CS_Client["💻 Cliente (Desktop/Web)\n• UI simples\n• Lógica mínima\n• Conexão estável"]
+CS_Server["🧩 Servidor Monolítico\n• Regras de negócio\n• Sessão do usuário\n• Processamento centralizado"]
+CS_DB["🗄️ Banco de Dados\n• Único ponto de persistência"]
+
+    CS_Client -->|HTTP, RPC| CS_Server
+    CS_Server --> CS_DB
+end
+
+%% --- MOBILE SIDE ---
+subgraph B["📱 Arquitetura Mobile Moderna"]
+    M_App["📲 App Mobile\n• UI + Domínio + Dados\n• Cache offline\n• Sincronização e segurança local"]
+    M_BFF["☁️ BFF / API Gateway\n• Orquestra APIs\n• Adapta respostas para mobile\n• Autenticação via tokens"]
+    M_Services["🧱 Microsserviços / Backend\n• Lógica distribuída\n• Stateless\n• Escalável"]
+    M_DB["🗃️ Banco de Dados + CDN\n• Distribuído\n• Cache global\n• Replicação"]
+
+    M_App -->|REST / GraphQL / gRPC| M_BFF
+    M_BFF -->|APIs internas| M_Services
+    M_Services --> M_DB
+end
+
+%% --- VISUAL SEPARATOR ---
+A ---|⬅️➡️ Comparação| B
